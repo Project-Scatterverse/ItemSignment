@@ -1,0 +1,7 @@
+name: ItemSignment
+version: '1.0'
+main: org.lirox.itemsignment.ItemSignment
+api-version: '1.21'
+prefix: ItemSignment
+authors: [ LiroxDeYamon ]
+description: Allows to sign an item using /sign command!

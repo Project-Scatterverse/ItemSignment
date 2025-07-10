@@ -1,0 +1,16 @@
+messages:
+  # Add %player% for player name
+  # Add %time% for time in HH:MM:SS
+  # Add %date% for date in MM:DD
+  # Add %year% for year
+  # Add %mc_day% for minecraft day
+  # See https://webui.advntr.dev/ for text formating
+  prefix: "<aqua><b>[ItemSignment]</b>/aqua> " # Remember to add space at the end!
+  no-item: "<dark_red>You need to hold an item in your main hand!</dark_red>"
+  no-sign: "<dark_red>This item isn't signed!</dark_red>"
+  already-signed: "<dark_red>This item is already signed!</dark_red>"
+  sign-success: "<green>Successfully signed the item.</green>"
+  unsign-success: "<green>Successfully unsigned the item.</green>"
+  sign: "<gradient:#AA00FF:#55FFFF>Signed by %player%</gradient>"
+  error: "<dark_red>Error. Contact the server owner.</dark_red>"
+  error-console: "Error. Contact the plugin developer."
