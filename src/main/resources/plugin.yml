@@ -5,3 +5,12 @@ api-version: '1.21'
 prefix: ItemSignment
 authors: [ LiroxDeYamon ]
 description: Allows to sign an item using /sign command!
+commands:
+  sign:
+    description: "Signs the item in main hand."
+  sign_all:
+    description: "Signs every item in the inventory."
+  unsign:
+    description: "Unsigns the item in main hand."
+  unsign_all:
+    description: "Unsigns every item in the inventory."

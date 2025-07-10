@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.lirox.itemsignment.ItemSignment.config;
+import static org.lirox.itemsignment.ItemSignment.log;
 
 public class MessageFormater {
     private final static MiniMessage mm = MiniMessage.miniMessage();
@@ -22,5 +23,14 @@ public class MessageFormater {
                 .replace("%year%", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy")))
                 .replace("%mc_day%", String.valueOf(player.getWorld().getFullTime() / 24000L))
         );
+    }
+
+    public static @NotNull String getMessage(String key) {
+        return config.getString("messages."+key, "404 Check config");
+    }
+
+    public static void sendErrorLog(Exception exception) {
+        log.warning(config.getString("messages.error-console", "404 Check config"));
+        log.warning(exception.getMessage());
     }
 }

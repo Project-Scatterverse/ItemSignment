@@ -8,9 +8,18 @@ messages:
   prefix: "<aqua><b>[ItemSignment]</b>/aqua> " # Remember to add space at the end!
   no-item: "<dark_red>You need to hold an item in your main hand!</dark_red>"
   no-sign: "<dark_red>This item isn't signed!</dark_red>"
+  not-author: "<dark_red>You're not this sign author!</dark_red>"
   already-signed: "<dark_red>This item is already signed!</dark_red>"
   sign-success: "<green>Successfully signed the item.</green>"
   unsign-success: "<green>Successfully unsigned the item.</green>"
+  sign_all-success: "<green>Successfully signed every item in the inventory.</green>"
+  unsign_all-success: "<green>Successfully unsigned every item in the inventory.</green>"
   sign: "<gradient:#AA00FF:#55FFFF>Signed by %player%</gradient>"
   error: "<dark_red>Error. Contact the server owner.</dark_red>"
   error-console: "Error. Contact the plugin developer."
+
+# permissions:
+# itemsignment.sign.use
+# itemsignment.sign_all.use
+# itemsignment.unsign.use
+# itemsignment.unsign_all.use
