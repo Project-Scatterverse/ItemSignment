@@ -8,6 +8,8 @@ import org.jspecify.annotations.Nullable;
 import org.lirox.itemsignment.MessageFormater;
 import org.lirox.itemsignment.SignSigner;
 
+import static org.lirox.itemsignment.ItemSignment.config;
+
 @NullMarked
 public class UnsignAllCommand implements BasicCommand {
     @Override
@@ -25,6 +27,6 @@ public class UnsignAllCommand implements BasicCommand {
 
     @Override
     public @Nullable String permission() {
-        return "itemsignment.unsign_all.use";
+        return config.getBoolean("use-permissions", false) ? "itemsignment.unsign_all.use" : null;
     }
 }

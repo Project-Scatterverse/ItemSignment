@@ -10,6 +10,8 @@ import org.jspecify.annotations.Nullable;
 import org.lirox.itemsignment.MessageFormater;
 import org.lirox.itemsignment.SignSigner;
 
+import static org.lirox.itemsignment.ItemSignment.config;
+
 @NullMarked
 public class UnsignCommand implements BasicCommand {
     @Override
@@ -18,7 +20,7 @@ public class UnsignCommand implements BasicCommand {
         if (player == null) return;
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
-        if (itemStack.isEmpty()) {
+        if (itemStack.getType().isAir()) {
             player.sendMessage(MessageFormater.format(MessageFormater.getMessage("no-item"), player));
             return;
         }
@@ -44,6 +46,6 @@ public class UnsignCommand implements BasicCommand {
 
     @Override
     public @Nullable String permission() {
-        return "itemsignment.unsign.use";
+        return config.getBoolean("use-permissions", false) ? "itemsignment.unsign.use" : null;
     }
 }

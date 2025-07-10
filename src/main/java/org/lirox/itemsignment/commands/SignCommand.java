@@ -9,6 +9,8 @@ import org.jspecify.annotations.Nullable;
 import org.lirox.itemsignment.MessageFormater;
 import org.lirox.itemsignment.SignSigner;
 
+import static org.lirox.itemsignment.ItemSignment.config;
+
 @NullMarked
 public class SignCommand implements BasicCommand {
     @Override
@@ -17,7 +19,7 @@ public class SignCommand implements BasicCommand {
         if (player == null) return;
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
-        if (itemStack.isEmpty()) {
+        if (itemStack.getType().isAir()) {
             player.sendMessage(MessageFormater.format(MessageFormater.getMessage("no-item"), player));
             return;
         }
@@ -38,6 +40,7 @@ public class SignCommand implements BasicCommand {
 
     @Override
     public @Nullable String permission() {
-        return "itemsignment.sign.use";
+        return config.getBoolean("use-permissions", false) ? "itemsignment.sign.use" : null;
     }
+
 }

@@ -16,13 +16,13 @@ public class MessageFormater {
     private final static String prefix = config.getString("messages.prefix", "404 Check config");
 
     public static @NotNull Component format(String message, Player player) {
-        return mm.deserialize((prefix+message)
+        return mm.deserialize(message
+                .replace("%prefix%", prefix)
                 .replace("%player%", player.getName())
                 .replace("%time%", LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")))
                 .replace("%date%", LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM-dd")))
                 .replace("%year%", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy")))
-                .replace("%mc_day%", String.valueOf(player.getWorld().getFullTime() / 24000L))
-        );
+                .replace("%mc_day%", String.valueOf(player.getWorld().getFullTime() / 24000L)));
     }
 
     public static @NotNull String getMessage(String key) {

@@ -1,10 +1,14 @@
 package org.lirox.itemsignment;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lirox.itemsignment.ItemSignment.signerKey;
 
@@ -21,27 +25,39 @@ public class SignSigner {
     public static void sign(ItemStack itemStack, Player player) {
         ItemMeta meta = itemStack.getItemMeta();
         meta.getPersistentDataContainer().set(signerKey, PersistentDataType.STRING, player.getName());
+        List<Component> lore = new ArrayList<>();
+        if (meta.hasLore()) lore = meta.lore();
+        lore.add(MessageFormater.format(MessageFormater.getMessage("sign"), player));
+        meta.lore(lore);
         itemStack.setItemMeta(meta);
     }
 
     public static void unsign(ItemStack itemStack) {
         ItemMeta meta = itemStack.getItemMeta();
         meta.getPersistentDataContainer().remove(signerKey);
+        List<Component> lore = meta.lore();
+        lore.remove(lore.size()-1);
+        meta.lore(lore);
         itemStack.setItemMeta(meta);
     }
 
+
     public static void signWholeDamnInventory(Player player) {
-        for (ItemStack itemStack : player.getInventory().getContents()) {
-            if (itemStack != null && itemStack.isEmpty() && !isSigned(itemStack)) {
+        for (int i = 0; i < player.getInventory().getSize(); i++) {
+            ItemStack itemStack = player.getInventory().getItem(i);
+            if (itemStack != null && !itemStack.getType().isAir() && !isSigned(itemStack)) {
                 sign(itemStack, player);
+                player.getInventory().setItem(i, itemStack);
             }
         }
     }
 
     public static void unsignWholeDamnInventory(Player player) {
-        for (ItemStack itemStack : player.getInventory().getContents()) {
-            if (itemStack != null && itemStack.isEmpty() && (isAuthor(itemStack, player) || player.getGameMode().equals(GameMode.CREATIVE))) {
+        for (int i = 0; i < player.getInventory().getSize(); i++) {
+            ItemStack itemStack = player.getInventory().getItem(i);
+            if (itemStack != null && !itemStack.getType().isAir() && isSigned(itemStack) && (isAuthor(itemStack, player) || player.getGameMode() == GameMode.CREATIVE)) {
                 unsign(itemStack);
+                player.getInventory().setItem(i, itemStack);
             }
         }
     }
